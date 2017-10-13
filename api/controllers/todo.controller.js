@@ -26,7 +26,7 @@ router.post('/',function(req,res){
 });
 
 // get pending/completed task
-router.get('/task', function (req, res) {
+router.get('/tasks', function (req, res) {
     var param=req.query;
     Todo.find(
         { status: param.status},

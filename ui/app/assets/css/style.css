@@ -1,0 +1,7 @@
+.markClass{
+    text-decoration: line-through;
+    background-color: #ccc;
+}
+span:hover{
+    cursor: pointer;
+}

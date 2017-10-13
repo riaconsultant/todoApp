@@ -5,7 +5,7 @@ mongoose.Promise = require('bluebird');
 var Schema = mongoose.Schema;
 
 var todoSchema = new Schema({
-    todo:String,
+    task:String,
     status:Number
 });
 var Todo = mongoose.model('Todo',todoSchema);
