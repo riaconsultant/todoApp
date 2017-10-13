@@ -14,6 +14,8 @@
         todoCtrl.getTask = getTask;
         todoCtrl.taskComplete = taskComplete;
         todoCtrl.editTask = editTask;
+        todoCtrl.taskDelete = taskDelete;
+        todoCtrl.getAll = getAll;
 
 
         initController();
@@ -45,17 +47,25 @@
                 getTask(1);
             });
         };
+        function taskDelete(todo) {
+            todoCtrl.dataLoading = true;
+            todo.status = 3;
+            TodoService.Update(todo).then(function(todos){
+                FlashService.Success('Task Deleted.', true);
+                getTask(1);
+            });
+        };
         
         function save() {
             //console.log(todoCtrl.todo);
-            todoCtrl.todo.status = 1;
             todoCtrl.dataLoading = true;
-            if(todoCtrl.todo._id){
+            if(todoCtrl.todo._id && todoCtrl.todo.status === 1){
                 TodoService.Update(todoCtrl.todo).then(function(todos){
                     FlashService.Success('Task updated completed.', true);
                     getTask(1);
                 });
             }else{
+                todoCtrl.todo.status = 1;
                 TodoService.Create(todoCtrl.todo).then(function(){
                     FlashService.Success('Task created successfully.', true);
                     getTask(1);

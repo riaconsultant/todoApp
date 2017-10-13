@@ -28,6 +28,7 @@
                 <div style="clear:both;">
                     <button type="button" class="btn btn-warning" ng-click="todoCtrl.getTask(1)">Pending Task</button>
                     <button type="button" class="btn btn-success" ng-click="todoCtrl.getTask(2)">Completed task</button>
+                    <button type="button" class="btn btn-primary" ng-click="todoCtrl.getAll()">All task</button>
                 </div>
                 <div style="clear:both;">
                     <table class="table table-hover">
@@ -40,7 +41,8 @@
                             <tr ng-repeat="x in todoCtrl.data | orderBy : 'status'">
                                 <td ng-class="(x.status != 1) ? 'markClass':'' ">
                                     <input type="checkbox" ng-value="{{todoCtrl.selectedTask}}" ng-disabled="(x.status != 1) ? true :false " ng-click="todoCtrl.taskComplete(x)">
-                                     <span ng-click="todoCtrl.editTask(x)">{{ x.task }}</span>
+                                     <span ng-click="todoCtrl.editTask(x)" ng-disabled="(x.status === 1) ? true :false ">{{ x.task }}</span>
+                                     <input type="button" value="Delete task" ng-if="(x.status === 1) ? true :false " ng-click="todoCtrl.taskDelete(x)" style="float:right;">
                                 </td>
                             </tr>
                         </tbody>
